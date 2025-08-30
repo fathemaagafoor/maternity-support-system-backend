@@ -11,7 +11,28 @@ export const createHospital = async (req, res) => {
 			address,
 			location,
 		});
-		res.status(500).json({ message: error });
+		res.status(200).json({ message: "Hospital Is Created" });
+	} catch (error) {
+		return res.status(500).json({ message: error });
+	}
+};
+export const getHospital = async (req, res) => {
+	try {
+		const hospitals = await Hospital.find({});
+		res.status(200).json({ message: "Success", data: hospitals });
+	} catch (error) {
+		return res.status(500).json({ message: error });
+	}
+};
+
+export const getOneHospital = async (req, res) => {
+	const { hospitalId } = req.body;
+
+	try {
+		const hospital = await Hospital.findOne({
+			_id: hospitalId,
+		});
+		res.status(200).json({ message: "success", data: hospital });
 	} catch (error) {
 		return res.status(500).json({ message: error });
 	}
