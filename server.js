@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 // import router from './src/routes/userRoutes.js';
@@ -13,7 +13,7 @@ app.use('/fathima', async (req, res) => {
 });
 
 
-app.use(router)
+app.use(Router)
 
 const db = mongoose.connect(process.env.MONGO_URL).then(() => console.log("DB connected"))
 
