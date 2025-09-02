@@ -8,36 +8,36 @@ const BookingSchema = new mongoose.Schema({
         ref: "Mother"
     },
     caregiver: {
-        type:mongoose.Types.ObjectId,
-        required:true,
-        ref:"Caregiver"
+        type: mongoose.Types.ObjectId,
+        required: true,
+        ref: "Caregiver"
     },
-    request_date:{
-    type:Date,
-    required:true,
+    request_date: {
+        type: Date,
+        required: true,
     },
-    start_date:{
-        type:Date,
-        requried:true,
+    start_date: {
+        type: Date,
+        requried: true,
     },
-    end_date:{
-        type:Date,
-        required:true,
+    end_date: {
+        type: Date,
+        required: true,
     },
-    shift:{
-        type:String,
-        required:true,
-        enum:["whole day","day","night"]
+    shift: {
+        type: String,
+        required: true,
+        enum: ["whole day", "day", "night"]
     },
-accommadation:{
-    type:String,
-    required:true,
-    enum:["withfood","withoutfood"]
-},
-requested_amount:{
-    type:number,
-    required:true,
-},
+    accommodation: {
+        type: String,
+        required: true,
+        enum: ["withfood", "withoutfood"]
+    },
+    requested_amount: {
+        type: number,
+        required: true,
+    },
 
 
 
