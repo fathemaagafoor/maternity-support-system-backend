@@ -7,7 +7,7 @@ const BabySchema = new mongoose.Schema({
 	},
 	name: {
 		type: String,
-		required: true,
+		required: true, 
 	},
 	gender: {
 		type: String,
@@ -51,6 +51,7 @@ const BabySchema = new mongoose.Schema({
 				},
 				milestones: {},
 			},
+			required:false,
 		},
 	],
 });

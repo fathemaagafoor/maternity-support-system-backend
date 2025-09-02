@@ -23,3 +23,4 @@ const HospitalSchema = new mongoose.Schema({
 	},
 });
 export default mongoose.model("Hospital", HospitalSchema);
+

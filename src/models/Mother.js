@@ -1,6 +1,11 @@
-import mongoose from "mongoose";
+import mongoose,{Types} from "mongoose";
 
 const MotherSchema = new mongoose.Schema({
+    user_id:{
+        type:Types.ObjectId,
+       required: true,
+    },
+
     name: {
         type: String,
         required: true,
@@ -12,11 +17,7 @@ const MotherSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    password: {
-        type: String,
-        required: true,
-    },
-
+   
     expected_delivery_date: {
         type: Date
     },

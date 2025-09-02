@@ -16,7 +16,7 @@ export const createHospital = async (req, res) => {
 		return res.status(500).json({ message: error });
 	}
 };
-export const getHospital = async (req, res) => {
+export const getAllHospital = async (req, res) => {
 	try {
 		const hospitals = await Hospital.find({});
 		res.status(200).json({ message: "Success", data: hospitals });
