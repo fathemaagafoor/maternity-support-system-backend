@@ -5,6 +5,12 @@ const HospitalSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	hospital_type:{
+		type:String,
+		required:true,
+		enum:["hospital","clinic"]
+	},
+	
 	place: {
 		type: String,
 		required: true,

@@ -1,15 +1,13 @@
-import Doctor from "../models/Doctor";
+import Doctor from "../models/Doctor.js";
 
 export const createDoctor = async (req, res) => {
-    const { name, degree, hospital_id, clinic, hospital, specialized } = req.body;
+    const { name, degree, hospital_id, specialized } = req.body;
 
     try {
         const doctor = await Doctor.create({
             name,
             degree,
             hospital_id,
-            clinic,
-            hospital,
             specialized
 
         });

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import Hospital from "./Hospital";
 
 const DoctorSchema = new mongoose.Schema({
 	name: {
@@ -15,17 +14,10 @@ const DoctorSchema = new mongoose.Schema({
 		required: true,
 		ref: "Hospital",
 	},
-	clinic: {
-		type: Boolean,
-		required,
-	},
-	hospital: {
-		type: Boolean,
-		required,
-	},
+	
 	specialised: {
 		type: String,
-		required,
+		required: true,
 	},
 });
 export default mongoose.model("Doctors", DoctorSchema);

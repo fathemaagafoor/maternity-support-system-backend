@@ -1,11 +1,12 @@
 import Hospital from "../models/Hospital";
 
 export const createHospital = async (req, res) => {
-	const { hospital_name, place, phoneNumber, address, location } = req.body;
+	const { hospital_name,hospital_type, place, phoneNumber, address, location } = req.body;
 
 	try {
 		const hospital = await Hospital.create({
 			hospital_name,
+			hospital_type,
 			phoneNumber,
 			place,
 			address,
