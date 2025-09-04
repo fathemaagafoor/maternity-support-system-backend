@@ -1,18 +1,25 @@
-import Hospital from "../models/Hospital";
+import Hospital from "../models/Hospital.js";
 
 export const createHospital = async (req, res) => {
-	const { hospital_name,hospital_type, place, phoneNumber, address, location } = req.body;
+	const {
+		hospital_name,
+		hospital_type,
+		place,
+		phone_number,
+		address,
+		location,
+	} = req.body;
 
 	try {
 		const hospital = await Hospital.create({
 			hospital_name,
 			hospital_type,
-			phoneNumber,
+			phone_number,
 			place,
 			address,
 			location,
 		});
-		res.status(200).json({ message: "Hospital Is Created" });
+		res.status(200).json({ message: "Hospital Is Created", data: hospital });
 	} catch (error) {
 		return res.status(500).json({ message: error });
 	}
@@ -27,11 +34,11 @@ export const getAllHospital = async (req, res) => {
 };
 
 export const getOneHospital = async (req, res) => {
-	const { hospitalId } = req.body;
+	const {id } = req.params;
 
 	try {
 		const hospital = await Hospital.findOne({
-			_id: hospitalId,
+			_id:id,
 		});
 		res.status(200).json({ message: "success", data: hospital });
 	} catch (error) {

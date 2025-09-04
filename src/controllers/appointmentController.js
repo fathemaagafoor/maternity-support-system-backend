@@ -28,11 +28,11 @@ export const getAllAppointment = async (req, res) => {
 	}
 };
 export const getOneAppointment = async (req, res) => {
-	const { appointmentId } = req.body;
+	const { id } = req.params;
 
 	try {
 		const appointment = await Appointment.findOne({
-			_id: appointmentId,
+			_id: id,
 		});
 		res.status(200).json({ message: "success", data: appointment });
 	} catch (error) {

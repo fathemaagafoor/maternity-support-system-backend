@@ -6,6 +6,8 @@ import motherRoutes from "./motherRoutes.js";
 import caregiverRoutes from "./caregiverRoutes.js";
 import appointmentRoutes from "./appointmentRoutes.js";
 import doctorRoutes from "./doctorRoutes.js";
+import hospitalRoutes from "./hospitalRoutes.js";
+import vaccineRoutes from "./vaccineRoutes.js";
 
 const apiRoutes = Router();
 
@@ -16,5 +18,7 @@ apiRoutes.use("/mother", motherRoutes);
 apiRoutes.use("/caregiver", caregiverRoutes);
 apiRoutes.use("/appointment", appointmentRoutes);
 apiRoutes.use("/doctor", doctorRoutes);
+apiRoutes.use("/hospital", hospitalRoutes);
+apiRoutes.use("/vaccine", vaccineRoutes);
 
 export default apiRoutes;

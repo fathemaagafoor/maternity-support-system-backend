@@ -39,11 +39,11 @@ export const getAllcaregiverBooking = async (req, res) => {
 };
 
 export const getOnecaregiverBooking = async (req, res) => {
-	const { caregiverBookingId } = req.body;
+	const { id } = req.params;
 
 	try {
 		const caregiverbooking = await CaregiverBooking.findOne({
-			_id: caregiverBookingId,
+			_id: id,
 		});
 		res.status(200).json({ message: "Success", data: caregiverbooking });
 	} catch (error) {

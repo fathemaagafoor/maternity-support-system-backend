@@ -20,18 +20,18 @@ export const createCaregiver = async (req, res) => {
 };
 export const getAllCaregiver = async (req, res) => {
 	try {
-		const caregiver = await Caregiveraregiver.find({});
+		const caregiver = await Caregiver.find({});
 		res.status(200).json({ message: "Success", data: caregiver });
 	} catch (error) {
 		return res.status(500).json({ message: error });
 	}
 };
 export const getOneCaregiver = async (req, res) => {
-	const { CaregiverId } = req.body;
+	const { id } = req.params;
 
 	try {
-		const Caregiver = await Booking.findOne({
-			_id: caregiverId,
+		const caregiver = await Caregiver.findOne({
+			_id: id,
 		});
 		res.status(200).json({ message: "success", data: caregiver });
 	} catch (error) {

@@ -33,12 +33,15 @@ export const getAllMother = async (req, res) => {
 		return res.status(500).json({ message: error });
 	}
 };
+
+
+
 export const getOneMother = async (req, res) => {
-	const { mother_id } = req.body;
+	const { id } = req.params;
 
 	try {
 		const mother = await Mother.findOne({
-			_id: mother_id,
+			_id: id,
 		});
 		res.status(200).json({ message: "success", data: mother });
 	} catch (error) {

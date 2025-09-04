@@ -25,11 +25,11 @@ export const getAllBaby = async (req, res) => {
 	}
 };
 export const getOneBaby = async (req, res) => {
-	const { BabyId } = req.body;
+	const { id } = req.params;
 
 	try {
 		const baby = await Baby.findOne({
-			_id: BabyId,
+			_id: id,
 		});
 		res.status(200).json({ message: "success", data: baby });
 	} catch (error) {
