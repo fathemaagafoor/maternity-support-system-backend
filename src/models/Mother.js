@@ -1,9 +1,9 @@
-import mongoose,{Types} from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 const MotherSchema = new mongoose.Schema({
-    user_id:{
-        type:Types.ObjectId,
-       required: true,
+    user_id: {
+        type: Types.ObjectId,
+        required: true,
     },
 
     name: {
@@ -17,7 +17,7 @@ const MotherSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-   
+
     expected_delivery_date: {
         type: Date
     },

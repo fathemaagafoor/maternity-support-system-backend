@@ -10,7 +10,7 @@ export const createDoctor = async (req, res) => {
 			hospital_id,
 			specialised,
 		});
-		return res.status(200).json({ message: "Doctor Is Created" });
+		return res.status(200).json({ message: "Doctor Is Created", data: doctor });
 	} catch (error) {
 		return res.status(500).json({ message: error });
 	}

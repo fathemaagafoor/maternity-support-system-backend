@@ -4,6 +4,7 @@ const BabySchema = new mongoose.Schema({
 	mother_id: {
 		type: Types.ObjectId,
 		required: true,
+		ref: 'Mother'
 	},
 	name: {
 		type: String,
@@ -12,6 +13,7 @@ const BabySchema = new mongoose.Schema({
 	gender: {
 		type: String,
 		required: true,
+		enum: ["male", "female"]
 	},
 	weight: {
 		type: Number,

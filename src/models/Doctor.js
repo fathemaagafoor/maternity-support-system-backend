@@ -1,4 +1,4 @@
-import mongoose, {Types} from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 const DoctorSchema = new mongoose.Schema({
 	name: {
@@ -14,7 +14,7 @@ const DoctorSchema = new mongoose.Schema({
 		required: true,
 		ref: "Hospital",
 	},
-	
+
 	specialised: {
 		type: String,
 		required: true,
