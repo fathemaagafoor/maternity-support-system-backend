@@ -28,7 +28,9 @@ export const getAllVaccine = async (req, res) => {
 		return res.status(500).json({ message: error });
 	}
 };
-export const getOneVaccine = async (req, params) => {
+export const getOneVaccine = async (req, res) => {
+	const { id } = req.params;
+
 	try {
 		const vaccine = await Vaccine.find({
 			_id: id,
