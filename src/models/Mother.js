@@ -4,6 +4,7 @@ const MotherSchema = new mongoose.Schema({
     user_id: {
         type: Types.ObjectId,
         required: true,
+        ref: "Auth"
     },
 
     name: {
@@ -12,11 +13,11 @@ const MotherSchema = new mongoose.Schema({
 
     },
 
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    },
+    // email: {
+    //     type: String,
+    //     required: true,
+    //     unique: true,
+    // },
 
     expected_delivery_date: {
         type: Date

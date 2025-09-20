@@ -12,8 +12,9 @@ export const userOptions = {
     resource: Auth,
     options: {
         properties: {
+            _id: { isVisible: false },
             password: { isVisible: false }, // Hide password field
-            email: { isTitle: true },       // Use email as title field
+            email: { isVisible: true },       // Use email as title field
         },
         actions: {
             new: {

@@ -4,7 +4,7 @@ export const createMother = async (req, res) => {
 	const {
 		user_id,
 		name,
-		email,
+		// email,
 		expected_delivery_date,
 		is_pregnant,
 		phone_no,
@@ -14,7 +14,7 @@ export const createMother = async (req, res) => {
 		const mother = await Mother.create({
 			user_id,
 			name,
-			email,
+			// email,
 			expected_delivery_date,
 			is_pregnant,
 			phone_no,
