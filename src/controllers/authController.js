@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import Auth from "../models/Auth.js";
+import jwt from "jsonwebtoken";
 
 export const signup = async (req, res) => {
 	const email = req.body.email;
@@ -26,20 +27,26 @@ export const signIn = async (req, res) => {
 	const password = req.body.password;
 
 	try {
+
+
 		const userExist = await Auth.findOne({ email: email });
 		if (!userExist) {
 			return res.status(401).json({ message: "User not exist!" });
 		}
+
+
 		const isPasswordValid = await bcrypt.compare(password, userExist.password);
 
 		if (!isPasswordValid) {
 			return res.status(422).json({ message: "Incorrect password!" });
 		}
-
+		const privateKey = process.env.JWT_SECRET
+		const token = jwt.sign({ id: userExist.id }, privateKey, { algorithm: 'HS256', expiresIn: "1D" });
 		return res
-			.status(201)
-			.json({ message: "LogIn Successfull", data: userExist });
+			.status(200)
+			.json({ message: "LogIn Successfull", data: userExist, token });
 	} catch (error) {
+		console.log(error)
 		return res.status(500).json({ message: error });
 	}
 };
