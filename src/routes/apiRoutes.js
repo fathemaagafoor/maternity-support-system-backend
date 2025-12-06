@@ -8,6 +8,7 @@ import appointmentRoutes from "./appointmentRoutes.js";
 import doctorRoutes from "./doctorRoutes.js";
 import hospitalRoutes from "./hospitalRoutes.js";
 import vaccineRoutes from "./vaccineRoutes.js";
+import articleRoutes from "./articleRoutes.js";
 
 const apiRoutes = Router();
 
@@ -20,5 +21,6 @@ apiRoutes.use("/appointment", appointmentRoutes);
 apiRoutes.use("/doctor", doctorRoutes);
 apiRoutes.use("/hospital", hospitalRoutes);
 apiRoutes.use("/vaccine", vaccineRoutes);
+apiRoutes.use("/article", articleRoutes);
 
 export default apiRoutes;
