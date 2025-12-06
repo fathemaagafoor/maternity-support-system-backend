@@ -176,10 +176,10 @@ const MotherSchema = new mongoose.Schema(
     },
 
     // ========== PREGNANCY STATUS ==========
-    // Current status: pregnant, delivered, or planning
+    // Current status: pregnant, delivered
     status: {
       type: String,
-      enum: ["pregnant", "delivered", "planning"],
+      enum: ["pregnant", "delivered"],
       default: "pregnant",
     },
 

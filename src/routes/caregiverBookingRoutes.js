@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { 
-	createBooking, 
-	getMyBookings, 
+import {
+	createBooking,
+	getMyBookings,
 	cancelBooking,
 	addReview,
 	getBookingsForMe,
@@ -34,4 +34,3 @@ caregiverBookingRoutes.put("/:id/complete", completeBooking);
 
 export default caregiverBookingRoutes;
 
-export default caregiverBookingRoutes;

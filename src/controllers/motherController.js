@@ -6,7 +6,7 @@ export const createMother = async (req, res) => {
     name,
     phone_no,
     age,
-    status, // pregnant, delivered, planning
+    status, // pregnant, delivered
     expected_delivery_date,
     last_period_date,
     address,

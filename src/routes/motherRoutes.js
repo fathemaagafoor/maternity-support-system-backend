@@ -15,12 +15,10 @@ import {
   getSymptomLogs,
   addKickCount,
   getKickCounts,
-  addMoodLog,
-  getMoodLogs,
   addCheckupLog,
   getCheckupLogs,
-  markDelivery,
-  getPregnancyProgress,
+  markAsDelivered,
+  // getPregnancyProgress,
 } from "../controllers/motherController.js";
 import { authenticateToken } from "../middleware/authMiddleware.js";
 
@@ -44,8 +42,8 @@ motherRoutes.delete(
 );
 
 // Pregnancy tracking routes
-motherRoutes.get("/me/pregnancy-progress", getPregnancyProgress);
-motherRoutes.post("/me/mark-delivery", markDelivery);
+// motherRoutes.get("/me/pregnancy-progress", getPregnancyProgress);
+motherRoutes.post("/me/mark-delivery", markAsDelivered);
 
 // Weight logs
 motherRoutes.get("/me/weight-logs", getWeightLogs);
@@ -60,8 +58,8 @@ motherRoutes.get("/me/kick-counts", getKickCounts);
 motherRoutes.post("/me/kick-counts", addKickCount);
 
 // Mood logs
-motherRoutes.get("/me/mood-logs", getMoodLogs);
-motherRoutes.post("/me/mood-logs", addMoodLog);
+// motherRoutes.get("/me/mood-logs", getMoodLogs);
+// motherRoutes.post("/me/mood-logs", addMoodLog);
 
 // Checkup logs
 motherRoutes.get("/me/checkups", getCheckupLogs);

@@ -115,4 +115,3 @@ const BabySchema = new mongoose.Schema({
 
 export default mongoose.model("Baby", BabySchema);
 
-export default mongoose.model("Baby", BabySchema);
