@@ -15,6 +15,8 @@ export const createMother = async (req, res) => {
   // user_id comes from the logged in user (set by auth middleware)
   const user_id = req.user.id;
 
+  console.log("Creating mother profile for user_id:", user_id);
+
   try {
     // Check if mother profile already exists
     const existing = await Mother.findOne({ user_id: user_id });
@@ -26,7 +28,7 @@ export const createMother = async (req, res) => {
       user_id,
       name,
       phone_no,
-      age,
+      age: parseInt(age, 10) || 0, // Parse age to number
       status: status || "pregnant",
       expected_delivery_date,
       last_period_date,
@@ -34,7 +36,15 @@ export const createMother = async (req, res) => {
     });
     return res.status(201).json({ message: "Profile created", data: mother });
   } catch (error) {
-    console.log(error);
+    console.error("Error in createMother:", error);
+    // Handle CastError (invalid ObjectId)
+    if (error.name === "CastError") {
+      return res.status(400).json({ message: "Invalid user ID format." });
+    }
+    // Handle validation errors
+    if (error.name === "ValidationError") {
+      return res.status(400).json({ message: error.message });
+    }
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -69,6 +79,13 @@ export const getMyProfile = async (req, res) => {
   const user_id = req.user.id;
 
   try {
+    // Validate if user_id is a valid ObjectId to prevent CastError
+    // We dynamically import mongoose here or ensure it is imported at top.
+    // Since we can't easily add top-level import with this tool without getting whole file,
+    // and Mother model is imported, we can assume mongoose is available via Mother.db.base or just use try-catch.
+    // Simpler: just catch the specific CastError?
+    // Or assume invalid ID means no profile.
+
     const mother = await Mother.findOne({ user_id: user_id });
     if (!mother) {
       return res
@@ -92,6 +109,13 @@ export const getMyProfile = async (req, res) => {
       pregnancy_week: pregnancy_week,
     });
   } catch (error) {
+    console.error("Error in getMyProfile:", error);
+    // If it's a CastError (invalid ID), treat as not found
+    if (error.name === "CastError") {
+      return res
+        .status(404)
+        .json({ message: "Profile not found (Invalid ID)." });
+    }
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -156,12 +180,10 @@ export const markAsDelivered = async (req, res) => {
     if (!mother) {
       return res.status(404).json({ message: "Profile not found" });
     }
-    res
-      .status(200)
-      .json({
-        message: "Congratulations! Status updated to delivered",
-        data: mother,
-      });
+    res.status(200).json({
+      message: "Congratulations! Status updated to delivered",
+      data: mother,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
   }
@@ -444,12 +466,10 @@ export const addEmergencyContact = async (req, res) => {
     if (!mother) {
       return res.status(404).json({ message: "Profile not found" });
     }
-    res
-      .status(200)
-      .json({
-        message: "Emergency contact added",
-        data: mother.emergency_contacts,
-      });
+    res.status(200).json({
+      message: "Emergency contact added",
+      data: mother.emergency_contacts,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
   }
@@ -469,12 +489,10 @@ export const removeEmergencyContact = async (req, res) => {
     if (!mother) {
       return res.status(404).json({ message: "Profile not found" });
     }
-    res
-      .status(200)
-      .json({
-        message: "Emergency contact removed",
-        data: mother.emergency_contacts,
-      });
+    res.status(200).json({
+      message: "Emergency contact removed",
+      data: mother.emergency_contacts,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
   }

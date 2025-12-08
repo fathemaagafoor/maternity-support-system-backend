@@ -1,24 +1,26 @@
 import { Router } from "express";
 import {
-  createMother,
-  getAllMother,
-  getOneMother,
-  getMyProfile,
-  updateMyProfile,
+  addCheckupLog,
   addEmergencyContact,
-  removeEmergencyContact,
-  getEmergencyContacts,
+  addKickCount,
+  // Postnatal tracking
+  addRecoveryLog,
+  addSymptomLog,
   // Pregnancy tracking
   addWeightLog,
-  getWeightLogs,
-  addSymptomLog,
-  getSymptomLogs,
-  addKickCount,
-  getKickCounts,
-  addCheckupLog,
+  createMother,
+  getAllMother,
   getCheckupLogs,
+  getEmergencyContacts,
+  getKickCounts,
+  getMyProfile,
+  getOneMother,
+  getRecoveryLogs,
+  getSymptomLogs,
+  getWeightLogs,
   markAsDelivered,
-  // getPregnancyProgress,
+  removeEmergencyContact,
+  updateMyProfile,
 } from "../controllers/motherController.js";
 import { authenticateToken } from "../middleware/authMiddleware.js";
 
@@ -64,6 +66,10 @@ motherRoutes.post("/me/kick-counts", addKickCount);
 // Checkup logs
 motherRoutes.get("/me/checkups", getCheckupLogs);
 motherRoutes.post("/me/checkups", addCheckupLog);
+
+// Recovery logs (postnatal)
+motherRoutes.get("/me/recovery-logs", getRecoveryLogs);
+motherRoutes.post("/me/recovery-logs", addRecoveryLog);
 
 // Dynamic :id route last
 motherRoutes.get("/:id", getOneMother);
