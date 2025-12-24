@@ -17,7 +17,7 @@ export const createDoctor = async (req, res) => {
 };
 export const getAllDoctor = async (req, res) => {
 	try {
-		const doctorList = await Doctor.find({});
+		const doctorList = await Doctor.find({}).populate("hospital_id");
 		res.status(200).json({ message: "Success", data: doctorList });
 	} catch (error) {
 		return res.status(500).json({ message: error });

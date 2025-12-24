@@ -109,7 +109,7 @@ export const getMyProfile = async (req, res) => {
       pregnancy_week: pregnancy_week,
     });
   } catch (error) {
-    console.error("Error in getMyProfile:", error);
+    console.log("Error in getMyProfile:", error);
     // If it's a CastError (invalid ID), treat as not found
     if (error.name === "CastError") {
       return res
