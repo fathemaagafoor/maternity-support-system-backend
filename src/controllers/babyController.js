@@ -84,6 +84,31 @@ export const updateBaby = async (req, res) => {
   }
 };
 
+// Delete baby
+export const deleteBaby = async (req, res) => {
+  const { id } = req.params;
+  const user_id = req.user.id;
+
+  try {
+    // First verify the baby belongs to this user's mother profile
+    const mother = await Mother.findOne({ user_id: user_id });
+    if (!mother) {
+      return res.status(400).json({ message: "Mother profile not found" });
+    }
+
+    const baby = await Baby.findOne({ _id: id, mother_id: mother._id });
+    if (!baby) {
+      return res.status(404).json({ message: "Baby not found or not authorized" });
+    }
+
+    await Baby.findByIdAndDelete(id);
+    res.status(200).json({ message: "Baby deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 // ========== FEEDING TRACKING ==========
 
 // Add feeding log

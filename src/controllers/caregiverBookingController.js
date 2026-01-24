@@ -38,6 +38,29 @@ export const createBooking = async (req, res) => {
         .json({ message: "This caregiver is not approved yet" });
     }
 
+    // Check for conflicting bookings (same caregiver, overlapping dates, active status)
+    const requestedStart = new Date(start_date);
+    const requestedEnd = new Date(end_date);
+
+    const conflictingBooking = await CaregiverBooking.findOne({
+      caregiver: caregiver_id,
+      status: { $in: ["pending", "accepted"] }, // Only active bookings block
+      $or: [
+        // New booking starts during existing booking
+        { start_date: { $lte: requestedStart }, end_date: { $gte: requestedStart } },
+        // New booking ends during existing booking
+        { start_date: { $lte: requestedEnd }, end_date: { $gte: requestedEnd } },
+        // New booking completely contains existing booking
+        { start_date: { $gte: requestedStart }, end_date: { $lte: requestedEnd } },
+      ],
+    });
+
+    if (conflictingBooking) {
+      return res.status(400).json({
+        message: "Caregiver is not available for these dates. Please choose different dates.",
+      });
+    }
+
     const booking = await CaregiverBooking.create({
       mother: mother._id,
       caregiver: caregiver_id,

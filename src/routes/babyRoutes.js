@@ -5,6 +5,7 @@ import {
   getOneBaby,
   getMyBabies,
   updateBaby,
+  deleteBaby,
   addFeedingLog,
   getFeedingLogs,
   addSleepLog,
@@ -29,6 +30,7 @@ babyRoutes.get("/my-babies", getMyBabies);
 // Dynamic :id routes
 babyRoutes.get("/:id", getOneBaby);
 babyRoutes.put("/:id", updateBaby);
+babyRoutes.delete("/:id", deleteBaby);
 
 // Feeding tracking
 babyRoutes.post("/:id/feeding", addFeedingLog);
