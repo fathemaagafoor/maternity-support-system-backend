@@ -3,6 +3,7 @@ import {
   addCheckupLog,
   addEmergencyContact,
   addKickCount,
+  addMoodLog,
   // Postnatal tracking
   addRecoveryLog,
   addSymptomLog,
@@ -13,6 +14,7 @@ import {
   getCheckupLogs,
   getEmergencyContacts,
   getKickCounts,
+  getMoodLogs,
   getMyProfile,
   getOneMother,
   getRecoveryLogs,
@@ -60,8 +62,8 @@ motherRoutes.get("/me/kick-counts", getKickCounts);
 motherRoutes.post("/me/kick-counts", addKickCount);
 
 // Mood logs
-// motherRoutes.get("/me/mood-logs", getMoodLogs);
-// motherRoutes.post("/me/mood-logs", addMoodLog);
+motherRoutes.get("/me/mood-logs", getMoodLogs);
+motherRoutes.post("/me/mood-logs", addMoodLog);
 
 // Checkup logs
 motherRoutes.get("/me/checkups", getCheckupLogs);

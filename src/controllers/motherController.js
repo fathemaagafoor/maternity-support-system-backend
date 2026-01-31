@@ -514,3 +514,45 @@ export const getEmergencyContacts = async (req, res) => {
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+// ========== MOOD TRACKING (POSTPARTUM) ==========
+
+export const addMoodLog = async (req, res) => {
+  const user_id = req.user.id;
+  const { mood, notes, date } = req.body;
+
+  try {
+    const mother = await Mother.findOneAndUpdate(
+      { user_id: user_id },
+      {
+        $push: {
+          mood_logs: { mood, notes, date: date || new Date() },
+        },
+      },
+      { new: true }
+    );
+    if (!mother) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+    res.status(201).json({ message: "Mood logged", data: mother.mood_logs });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getMoodLogs = async (req, res) => {
+  const user_id = req.user.id;
+
+  try {
+    const mother = await Mother.findOne({ user_id: user_id });
+    if (!mother) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+    const logs = (mother.mood_logs || []).sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
+    res.status(200).json({ message: "Success", data: logs });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};

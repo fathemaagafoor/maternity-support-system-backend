@@ -148,6 +148,26 @@ const RecoveryLogSchema = new mongoose.Schema(
     notes: {
       type: String,
     },
+  }, // Added missing closing brace for the schema definition object
+  { timestamps: true }
+);
+
+// Mood tracking (postpartum mental health)
+const MoodLogSchema = new mongoose.Schema(
+  {
+    date: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    mood: {
+      type: String,
+      enum: ["happy", "calm", "anxious", "sad", "tired", "irritable", "excited"],
+      required: true,
+    },
+    notes: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
@@ -208,6 +228,7 @@ const MotherSchema = new mongoose.Schema(
 
     // ========== POSTNATAL TRACKING ==========
     recovery_logs: [RecoveryLogSchema],
+    mood_logs: [MoodLogSchema],
 
     // ========== OTHER INFO ==========
     // Emergency contacts for SOS feature
