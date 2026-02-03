@@ -28,7 +28,12 @@ export const doctorOptions = {
     navigation: { name: "Medical", icon: "Activity" },
     properties: {
       _id: { isVisible: false },
+      experience_years: { description: "Years of experience" },
+      age: { description: "Doctor's age" },
+      shift: { description: "Working shift (morning/evening/night)" },
+      about: { description: "Doctor's bio/description", type: "textarea" },
     },
+    listProperties: ["name", "degree", "hospital_id", "shift", "experience_years"],
   },
 };
 
@@ -122,6 +127,8 @@ export const hospitalOptions = {
     navigation: { name: "Medical", icon: "Activity" },
     properties: {
       _id: { isVisible: false },
+      location: { description: "Google Maps link (e.g., https://maps.google.com/?q=...)" },
+      address: { description: "Full address of the hospital/clinic" },
     },
   },
 };

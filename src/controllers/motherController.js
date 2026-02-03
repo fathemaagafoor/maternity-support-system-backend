@@ -214,6 +214,29 @@ export const addWeightLog = async (req, res) => {
   }
 };
 
+// Remove weight log
+export const removeWeightLog = async (req, res) => {
+  const user_id = req.user.id;
+  const { log_id } = req.params;
+
+  try {
+    const mother = await Mother.findOneAndUpdate(
+      { user_id: user_id },
+      { $pull: { weight_logs: { _id: log_id } } },
+      { new: true }
+    );
+    if (!mother) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+    res.status(200).json({
+      message: "Weight log removed",
+      data: mother.weight_logs,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 export const getWeightLogs = async (req, res) => {
   const user_id = req.user.id;
 
@@ -254,6 +277,29 @@ export const addSymptomLog = async (req, res) => {
     res
       .status(201)
       .json({ message: "Symptoms logged", data: mother.symptom_logs });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+// Remove symptom log
+export const removeSymptomLog = async (req, res) => {
+  const user_id = req.user.id;
+  const { log_id } = req.params;
+
+  try {
+    const mother = await Mother.findOneAndUpdate(
+      { user_id: user_id },
+      { $pull: { symptom_logs: { _id: log_id } } },
+      { new: true }
+    );
+    if (!mother) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+    res.status(200).json({
+      message: "Symptom log removed",
+      data: mother.symptom_logs,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
   }
@@ -304,6 +350,29 @@ export const addKickCount = async (req, res) => {
     res
       .status(201)
       .json({ message: "Kick count logged", data: mother.kick_counts });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+// Remove kick count
+export const removeKickCount = async (req, res) => {
+  const user_id = req.user.id;
+  const { log_id } = req.params;
+
+  try {
+    const mother = await Mother.findOneAndUpdate(
+      { user_id: user_id },
+      { $pull: { kick_counts: { _id: log_id } } },
+      { new: true }
+    );
+    if (!mother) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+    res.status(200).json({
+      message: "Kick count removed",
+      data: mother.kick_counts,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
   }
@@ -373,6 +442,29 @@ export const addCheckupLog = async (req, res) => {
   }
 };
 
+// Remove checkup log
+export const removeCheckupLog = async (req, res) => {
+  const user_id = req.user.id;
+  const { log_id } = req.params;
+
+  try {
+    const mother = await Mother.findOneAndUpdate(
+      { user_id: user_id },
+      { $pull: { checkup_logs: { _id: log_id } } },
+      { new: true }
+    );
+    if (!mother) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+    res.status(200).json({
+      message: "Checkup log removed",
+      data: mother.checkup_logs,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 export const getCheckupLogs = async (req, res) => {
   const user_id = req.user.id;
 
@@ -428,6 +520,29 @@ export const addRecoveryLog = async (req, res) => {
     res
       .status(201)
       .json({ message: "Recovery logged", data: mother.recovery_logs });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+// Remove recovery log
+export const removeRecoveryLog = async (req, res) => {
+  const user_id = req.user.id;
+  const { log_id } = req.params;
+
+  try {
+    const mother = await Mother.findOneAndUpdate(
+      { user_id: user_id },
+      { $pull: { recovery_logs: { _id: log_id } } },
+      { new: true }
+    );
+    if (!mother) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+    res.status(200).json({
+      message: "Recovery log removed",
+      data: mother.recovery_logs,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
   }
@@ -552,6 +667,29 @@ export const getMoodLogs = async (req, res) => {
       (a, b) => new Date(b.date) - new Date(a.date)
     );
     res.status(200).json({ message: "Success", data: logs });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+// Remove mood log
+export const removeMoodLog = async (req, res) => {
+  const user_id = req.user.id;
+  const { log_id } = req.params;
+
+  try {
+    const mother = await Mother.findOneAndUpdate(
+      { user_id: user_id },
+      { $pull: { mood_logs: { _id: log_id } } },
+      { new: true }
+    );
+    if (!mother) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+    res.status(200).json({
+      message: "Mood log removed",
+      data: mother.mood_logs,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
   }

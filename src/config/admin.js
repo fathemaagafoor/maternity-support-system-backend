@@ -37,7 +37,7 @@ const adminJs = new AdminJS({
   ],
   rootPath: "/admin",
   branding: {
-    companyName: "Maternity Support System",
+    companyName: "Motherly",
     softwareBrothers: false,
   },
 });
@@ -63,7 +63,7 @@ const sessionOptions = {
   cookie: {
     httpOnly: true,
     secure: false, // set true if using https
-    maxAge: 1000 * 60 * 60, // 1 hour
+    maxAge: 1000 * 60 * 60 * 24 * 365 * 100, // ~100 years (effectively unlimited)
   },
 };
 

@@ -21,7 +21,13 @@ import {
   getSymptomLogs,
   getWeightLogs,
   markAsDelivered,
+  removeCheckupLog,
   removeEmergencyContact,
+  removeKickCount,
+  removeMoodLog,
+  removeRecoveryLog,
+  removeSymptomLog,
+  removeWeightLog,
   updateMyProfile,
 } from "../controllers/motherController.js";
 import { authenticateToken } from "../middleware/authMiddleware.js";
@@ -52,26 +58,32 @@ motherRoutes.post("/me/mark-delivery", markAsDelivered);
 // Weight logs
 motherRoutes.get("/me/weight-logs", getWeightLogs);
 motherRoutes.post("/me/weight-logs", addWeightLog);
+motherRoutes.delete("/me/weight-logs/:log_id", removeWeightLog);
 
 // Symptom logs
 motherRoutes.get("/me/symptom-logs", getSymptomLogs);
 motherRoutes.post("/me/symptom-logs", addSymptomLog);
+motherRoutes.delete("/me/symptom-logs/:log_id", removeSymptomLog);
 
 // Kick counts (baby movement tracking)
 motherRoutes.get("/me/kick-counts", getKickCounts);
 motherRoutes.post("/me/kick-counts", addKickCount);
+motherRoutes.delete("/me/kick-counts/:log_id", removeKickCount);
 
 // Mood logs
 motherRoutes.get("/me/mood-logs", getMoodLogs);
 motherRoutes.post("/me/mood-logs", addMoodLog);
+motherRoutes.delete("/me/mood-logs/:log_id", removeMoodLog);
 
 // Checkup logs
 motherRoutes.get("/me/checkups", getCheckupLogs);
 motherRoutes.post("/me/checkups", addCheckupLog);
+motherRoutes.delete("/me/checkups/:log_id", removeCheckupLog);
 
 // Recovery logs (postnatal)
 motherRoutes.get("/me/recovery-logs", getRecoveryLogs);
 motherRoutes.post("/me/recovery-logs", addRecoveryLog);
+motherRoutes.delete("/me/recovery-logs/:log_id", removeRecoveryLog);
 
 // Dynamic :id route last
 motherRoutes.get("/:id", getOneMother);
