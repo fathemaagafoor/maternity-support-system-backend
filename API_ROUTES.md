@@ -290,33 +290,6 @@ Delivery type options: `normal`, `cesarean`
 
 ---
 
-## 🏥 Appointment Routes (`/api/appointment`)
-*All routes require authentication*
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/create` | Create appointment |
-| GET | `/my-appointments` | Get my appointments |
-| GET | `/all` | Get all appointments (admin) |
-| GET | `/:id` | Get one appointment |
-| PUT | `/:id` | Update appointment |
-| DELETE | `/:id` | Delete appointment |
-
-### Create Appointment Request Body:
-```json
-{
-  "title": "Monthly Checkup",
-  "venue_type": "hospital",
-  "venue_name": "City Hospital",
-  "doctor_name": "Dr. Smith",
-  "date": "2025-02-15",
-  "time": "10:30 AM",
-  "notes": ""
-}
-```
-
----
-
 ## 🏥 Hospital Routes (`/api/hospital`)
 
 | Method | Endpoint | Description |

@@ -1,0 +1,140 @@
+:root {
+  --colors-primary100: #ce9786;
+  --colors-primary80: #d7a696;
+  --colors-primary60: #e0b5a7;
+  --colors-primary40: #e8c5b8;
+  --colors-primary20: #f1ddd6;
+
+  --colors-accent: #b97e6c;
+  --colors-filterBg: #f6ebe7;
+}
+
+.adminjs_Box {
+  border-radius: 10px;
+}
+
+.adminjs_Button {
+  border-radius: 8px;
+}
+
+.adminjs_H2,
+.adminjs_H3,
+.adminjs_H4 {
+  letter-spacing: 0.2px;
+}
+
+.motherly-login-brand {
+  background: linear-gradient(160deg,
+      var(--colors-primary100) 0%,
+      var(--colors-primary80) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.motherly-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.motherly-login-form .motherly-field-group {
+  display: grid;
+  gap: 8px;
+}
+
+.motherly-login-form .adminjs_Label {
+  color: #7d6158;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.motherly-login-form .adminjs_Input {
+  border-radius: 12px;
+  border: 1px solid #e8c5b8;
+  background: #fffaf8;
+  height: 44px;
+  padding: 0 12px;
+  font-size: 14px;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+}
+
+.motherly-login-form .adminjs_Input::placeholder {
+  color: #b89f98;
+}
+
+.motherly-login-form .adminjs_Input:focus {
+  outline: none;
+  border-color: var(--colors-primary100);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(206, 151, 134, 0.22);
+}
+
+.motherly-dashboard-hero {
+  border-radius: 16px;
+  padding: 28px;
+  background: linear-gradient(160deg,
+      var(--colors-primary100) 0%,
+      var(--colors-primary80) 100%);
+}
+
+.motherly-dashboard-grid {
+  gap: 16px;
+}
+
+.motherly-dashboard-title {
+  color: #fff !important;
+}
+
+.motherly-dashboard-logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.motherly-dashboard-logo {
+  display: block;
+  width: 180px;
+  height: auto;
+}
+
+.motherly-section-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+
+.motherly-section-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(20, 20, 40, 0.12);
+}
+
+.motherly-section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.motherly-section-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--colors-primary20);
+  color: var(--colors-primary100);
+}
+
+@media (max-width: 900px) {
+  .motherly-login-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+}

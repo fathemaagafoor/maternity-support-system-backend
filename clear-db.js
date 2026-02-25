@@ -1,9 +1,8 @@
-import mongoose from 'mongoose';
 import 'dotenv/config';
+import mongoose from 'mongoose';
 
 // Import all models
 import Article from './src/models/Article.js';
-import Appointment from './src/models/Appointment.js';
 import Auth from './src/models/Auth.js';
 import Baby from './src/models/Baby.js';
 import Caregiver from './src/models/Caregiver.js';
@@ -24,7 +23,6 @@ const clearDatabase = async () => {
 
         const results = await Promise.all([
             Article.deleteMany({}).then(r => ({ name: 'Articles', count: r.deletedCount })),
-            Appointment.deleteMany({}).then(r => ({ name: 'Appointments', count: r.deletedCount })),
             Auth.deleteMany({}).then(r => ({ name: 'Auth', count: r.deletedCount })),
             Baby.deleteMany({}).then(r => ({ name: 'Babies', count: r.deletedCount })),
             Caregiver.deleteMany({}).then(r => ({ name: 'Caregivers', count: r.deletedCount })),

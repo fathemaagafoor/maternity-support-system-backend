@@ -1,9 +1,9 @@
+import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 import os from "os";
-import apiRoutes from "./src/routes/apiRoutes.js";
 import { adminJs, adminRouter } from "./src/config/admin.js";
+import apiRoutes from "./src/routes/apiRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -39,6 +39,9 @@ app.use((req, res, next) => {
 
 // Parse JSON body
 app.use(express.json());
+
+// AdminJS static assets
+app.use("/admin-assets", express.static("src/admin-assets"));
 
 // API routes
 app.use("/api", apiRoutes);

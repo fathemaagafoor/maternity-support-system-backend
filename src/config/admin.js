@@ -1,11 +1,12 @@
 // src/config/admin.js
-import AdminJS from "adminjs";
 import AdminJSExpress from "@adminjs/express";
 import * as AdminJSMongoose from "@adminjs/mongoose";
+import AdminJS from "adminjs";
 import MongoStore from "connect-mongo";
 import { configDotenv } from "dotenv";
+import { componentLoader, Components } from "./admin-components.js";
 import {
-  appointmentOptions,
+  articleOptions,
   babyOptions,
   caregiverBookingOptions,
   caregiverOptions,
@@ -14,7 +15,6 @@ import {
   motherOptions,
   userOptions,
   vaccineOptions,
-  articleOptions,
 } from "./resources.js";
 
 // Load environment variables first
@@ -28,7 +28,6 @@ const adminJs = new AdminJS({
     doctorOptions,
     caregiverOptions,
     motherOptions,
-    appointmentOptions,
     babyOptions,
     caregiverBookingOptions,
     hospitalOptions,
@@ -36,9 +35,18 @@ const adminJs = new AdminJS({
     articleOptions,
   ],
   rootPath: "/admin",
+  componentLoader,
+  dashboard: {
+    component: Components.Dashboard,
+  },
   branding: {
-    companyName: "Motherly",
-    softwareBrothers: false,
+    companyName: "Motherly Admin",
+    logo: "/admin-assets/motherly-logo.png",
+    favicon: "/admin-assets/favicon.ico",
+    withMadeWithLove: false,
+  },
+  assets: {
+    styles: ["/admin-assets/admin-overrides.css"],
   },
 });
 

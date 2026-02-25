@@ -1,4 +1,4 @@
-import Appointment from "../models/Appointment.js";
+import Article from "../models/Article.js";
 import Auth from "../models/Auth.js";
 import Baby from "../models/Baby.js";
 import Caregiver from "../models/Caregiver.js";
@@ -7,7 +7,6 @@ import Doctor from "../models/Doctor.js";
 import Hospital from "../models/Hospital.js";
 import Mother from "../models/Mother.js";
 import Vaccine from "../models/Vaccine.js";
-import Article from "../models/Article.js";
 
 // Users (Auth) - for admin to see all users
 export const userOptions = {
@@ -167,7 +166,7 @@ export const caregiverOptions = {
 export const caregiverBookingOptions = {
   resource: CaregiverBooking,
   options: {
-    navigation: { name: "Bookings", icon: "Calendar" },
+    navigation: { name: "Caregivers", icon: "Users" },
     properties: {
       _id: { isVisible: false },
     },
@@ -184,17 +183,6 @@ export const motherOptions = {
       _id: { isVisible: false },
     },
     listProperties: ["name", "phone_no", "is_pregnant", "age"],
-  },
-};
-
-// Appointments
-export const appointmentOptions = {
-  resource: Appointment,
-  options: {
-    navigation: { name: "Medical", icon: "Activity" },
-    properties: {
-      _id: { isVisible: false },
-    },
   },
 };
 
