@@ -44,16 +44,122 @@ export const caregiverOptions = {
     navigation: { name: "Caregivers", icon: "Users" },
     properties: {
       _id: { isVisible: false },
+      // Make isApproved read-only everywhere — admin must use Approve/Reject actions
+      isApproved: {
+        isVisible: { list: true, show: true, edit: false, filter: true },
+      },
     },
-    // Make isApproved easy to toggle
     listProperties: [
       "name",
       "phone_no",
       "shift",
       "amount",
+      "experience_years",
+      "availability",
       "isApproved",
       "rating",
     ],
+    actions: {
+
+      // ── One-click Approve action (record) ──
+      approve: {
+        actionType: "record",
+        component: false,
+        icon: "CheckCircle",
+        label: "Approve",
+        guard: "Are you sure you want to approve this caregiver?",
+        // Only show on unapproved caregivers
+        isVisible: true,
+        isAccessible: (context) => {
+          return context.record && context.record.params.isApproved === false;
+        },
+        handler: async (request, response, context) => {
+          const { record, resource } = context;
+          const params = record.params;
+
+          // Validate required profile fields before approving
+          const missing = [];
+          if (!params.name) missing.push("name");
+          if (!params.phone_no) missing.push("phone_no");
+          if (!params.shift) missing.push("shift");
+          if (!params.amount) missing.push("amount");
+
+          if (missing.length > 0) {
+            return {
+              record: record.toJSON(),
+              notice: {
+                message: `Cannot approve: missing fields — ${missing.join(", ")}`,
+                type: "error",
+              },
+            };
+          }
+
+          await resource.update(record.id(), { isApproved: true });
+          return {
+            record: record.toJSON(),
+            notice: {
+              message: "Caregiver approved successfully!",
+              type: "success",
+            },
+            redirectUrl: context.h.resourceUrl({
+              resourceId: resource._decorated?.id() || resource.id(),
+            }),
+          };
+        },
+      },
+
+      // ── One-click Reject action (record) ──
+      reject: {
+        actionType: "record",
+        component: false,
+        icon: "XCircle",
+        label: "Reject",
+        guard: "Are you sure you want to reject this caregiver?",
+        isVisible: true,
+        isAccessible: (context) => {
+          return context.record && context.record.params.isApproved === true;
+        },
+        handler: async (request, response, context) => {
+          const { record, resource } = context;
+          await resource.update(record.id(), { isApproved: false });
+          return {
+            record: record.toJSON(),
+            notice: {
+              message: "Caregiver rejected.",
+              type: "success",
+            },
+            redirectUrl: context.h.resourceUrl({
+              resourceId: resource._decorated?.id() || resource.id(),
+            }),
+          };
+        },
+      },
+
+      // ── Bulk Approve action ──
+      bulkApprove: {
+        actionType: "bulk",
+        component: false,
+        icon: "CheckCircle",
+        label: "Approve Selected",
+        guard:
+          "Are you sure you want to approve all selected caregivers?",
+        handler: async (request, response, context) => {
+          const { records, resource } = context;
+          await Promise.all(
+            records.map((record) =>
+              resource.update(record.id(), { isApproved: true })
+            )
+          );
+          return {
+            records: records.map((r) => r.toJSON()),
+            notice: {
+              message: `${records.length} caregiver(s) approved!`,
+              type: "success",
+            },
+          };
+        },
+      },
+    },
   },
 };
 
